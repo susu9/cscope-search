@@ -33,18 +33,7 @@ function! cscope_search#ShowMyHis(list)
   endwhile
 endfunction
 
-function! s:_SearchTag(tag)
-  let ret = 1
-  let fakeEdit = 0
-  let curBuf = bufnr("%")
-  if g:cscope_search_prevent_jump && &cscopequickfix =~ 'e-' && &switchbuf !~ 'split\|newtab'
-    try
-      execute 'silent normal! ii'
-      let fakeEdit = 1
-    catch
-    endtry
-  endif
-
+function! s:_SearchTagCore(tag)
   try
     execute 'cs find e' a:tag
   catch /^Vim(cscope):E37/
@@ -54,14 +43,37 @@ function! s:_SearchTag(tag)
     echohl ErrorMsg
     echo v:exception
     echohl None
-    let ret = 0
+    return 0
   endtry
+  return 1
+endfunction
 
-  if fakeEdit
-    if bufnr("%") != curBuf
-      execute "silent buffer ". curBuf
+function! s:_SearchTag(tag)
+  if !g:cscope_search_prevent_jump
+    return s:_SearchTagCore(a:tag)
+  endif
+
+  let fakeEdit = 0
+  let curBuf = bufnr("%")
+	let curView = winsaveview()
+  if &cscopequickfix =~ 'e-' && &switchbuf !~ 'split\|newtab'
+    if &modified == 0
+      try
+        execute 'silent set modified'
+        let fakeEdit = 1
+      catch
+      endtry
     endif
-    execute 'silent normal! u'
+  endif
+
+  let ret = s:_SearchTagCore(a:tag)
+
+  if bufnr("%") != curBuf
+    execute 'silent buffer '. curBuf
+  endif
+	call winrestview(curView)
+  if fakeEdit
+    execute 'silent set nomodified'
   endif
   return ret
 endfunction
