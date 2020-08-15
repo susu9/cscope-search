@@ -8,11 +8,11 @@ Search a word through cscope egrep (It's fast!!)
 Copy the autoload and plugin folder to ~/.vim
 
 ### Use vim-plug
-Add Plug 'susu9/cscope_search' to .vimrc
+Add Plug 'susu9/cscope-search' to .vimrc
 
 ```vim
 call plug#begin('~/.vim/plugged')
-Plug 'susu9/cscope_search'
+Plug 'susu9/cscope-search'
 call plug#end()
 ```
 
