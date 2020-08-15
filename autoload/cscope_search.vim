@@ -53,11 +53,15 @@ function! s:_SearchTag(tag)
     return s:_SearchTagCore(a:tag)
   endif
 
+  if &buftype =~ 'quickfix'
+    execute 'silent wincmd p'
+  endif
+
   let fakeEdit = 0
   let curBuf = bufnr("%")
 	let curView = winsaveview()
   if &cscopequickfix =~ 'e-' && &switchbuf !~ 'split\|newtab'
-    if &modified == 0
+    if &modified == 0 && &modifiable
       try
         execute 'silent set modified'
         let fakeEdit = 1
