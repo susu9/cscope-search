@@ -35,7 +35,6 @@ call plug#end()
 Example
 ```vim
 set cscopequickfix=s-,f-,g-,c-,d-,i-,t-,e-
-set switchbuf=uselast
 nnoremap <C-f> :CscopeSearch<CR>
 nnoremap <C-h> :CscopeSearchHistory<CR>
 nnoremap <C-l> :CscopeSearchLast<CR>
