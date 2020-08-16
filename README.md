@@ -1,7 +1,7 @@
 # cscope_search
 Search a word through cscope egrep (It's fast!!)
 
-![demo-optimize](https://user-images.githubusercontent.com/6793352/90318345-b2afd900-dee4-11ea-9ac2-f1f7258c8151.gif)
+![cscope-search-demo-small](https://user-images.githubusercontent.com/6793352/90325216-ac921a80-df2d-11ea-9954-f4a32f3e0baf.gif)
 
 ## Installation
 ### Manually download
