@@ -1,4 +1,4 @@
-# cscope_search
+# cscope-search
 Search a word through cscope egrep (It's fast!!)
 
 ![cscope-search-demo-small](https://user-images.githubusercontent.com/6793352/90325216-ac921a80-df2d-11ea-9954-f4a32f3e0baf.gif)
